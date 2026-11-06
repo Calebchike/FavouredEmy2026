@@ -31,7 +31,6 @@
   --ink: #2b3320;
   --ink-soft: #5b6149;
   --line: #e3d6b4;
-  --navy: #14224a;
   --display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
   --script: "Pinyon Script", "Snell Roundhand", cursive;
   --body: "Jost", "Helvetica Neue", Arial, sans-serif;
@@ -193,34 +192,6 @@ dialog img { max-width: 94vw; max-height: 90vh; display: block; border-radius: 6
 .map-meta .actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .map-meta .btn { padding: 12px 18px; font-size: 11.5px; }
 
-/* dress code */
-.swatches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; max-width: 720px; margin: 0 auto; }
-@media (max-width: 560px) { .swatches { gap: 10px; } }
-.sw { text-align: center; min-width: 0; }
-.sw i { display: block; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--line); box-shadow: 0 10px 24px rgba(43,51,32,.14); max-width: 160px; margin: 0 auto 14px; }
-.sw .navy { background: radial-gradient(circle at 30% 28%, #2a3d80, var(--navy) 65%); border-color: var(--navy); }
-.sw .gold { background: var(--goldgrad); border-color: #c99a2e; }
-.sw .white { background: #fff; }
-.sw b { font-family: var(--display); font-weight: 600; font-size: 22px; display: block; line-height: 1.1; }
-.dress-note { max-width: 52ch; margin: 30px auto 0; color: var(--ink-soft); }
-
-/* rsvp */
-.rsvp { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
-@media (max-width: 760px) { .rsvp { grid-template-columns: minmax(0, 1fr); } }
-form { display: grid; gap: 16px; }
-label, legend { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
-input[type=text], select, textarea { width: 100%; font: 400 16px var(--body); color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px; margin-top: 6px; }
-fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
-.check { display: flex; gap: 10px; align-items: center; letter-spacing: 0; text-transform: none; font-size: 16px; color: var(--ink); font-weight: 300; }
-.check input { width: 18px; height: 18px; accent-color: var(--gold); }
-textarea { min-height: 190px; resize: vertical; line-height: 1.5; }
-.nums { font-family: var(--display); font-size: 22px; font-weight: 600; margin: 30px 0 0; line-height: 1.4; }
-.nums small { display: block; font-family: var(--body); font-weight: 300; font-size: 14px; color: var(--ink-soft); margin-bottom: 4px; }
-.nums a { color: inherit; text-decoration: none; }
-.nums b { font-weight: 600; color: var(--gold); user-select: all; }
-.hint { font-size: 13.5px; color: var(--ink-soft); margin: 8px 0 0; }
-.ok { color: var(--gold); font-weight: 500; }
-
 /* reservation pop-up */
 dialog.modal { position: relative; width: calc(100% - 32px); max-width: 560px; max-height: 92vh; overflow: auto; padding: 34px 28px 28px; background: var(--pearl); color: var(--ink); border: 1px solid var(--gold-soft); border-radius: 20px; }
 dialog.modal::backdrop { background: rgba(30,26,12,.62); }
@@ -335,8 +306,8 @@ footer p { margin: 8px 0 0; font-size: 13px; letter-spacing: .2em; text-transfor
           <p class="venue">Watchman Catholic Charismatic Renewal Movement, Port Harcourt Diocese</p>
           <p>Blossoming District, 4B Samson Chukwu Estate, by Zacozem Filling Station, Alcon Road, Woji, Port Harcourt.</p>
           <div class="actions">
-            <a class="btn solid" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%204B%20Samson%20Chukwu%20Estate%20Alcon%20Road%20Woji%20Port%20Harcourt">Get directions</a>
-            <a class="btn line" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20of%20Chidera%20%26%20Emeagwaoha%20-%20Solemnization%20of%20Holy%20Matrimony&dates=20261212T100000%2F20261212T100000&ctz=Africa%2FLagos&details=Starts%20at%2010%3A00%20AM%20WAT.&location=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%2C%204B%20Samson%20Chukwu%20Estate%2C%20Alcon%20Road%2C%20Woji%2C%20Port%20Harcourt">Add to calendar</a>
+            <a class="btn solid" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Drex%20Designs%20Technologies%2C%203%20Reverend%20Samson%20Chukwu%20Street%2C%20off%20Zacosem%20Gas%20Plant%2C%20Alcon%20Rd%2C%20Port%20Harcourt%2C%20Rivers%2C%20Nigeria">Get directions</a>
+            <a class="btn line" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20of%20Chidera%20%26%20Emeagwaoha%20-%20Solemnization%20of%20Holy%20Matrimony&dates=20261212T100000%2F20261212T100000&ctz=Africa%2FLagos&details=Starts%20at%2010%3A00%20AM%20WAT.&location=Drex%20Designs%20Technologies%2C%203%20Reverend%20Samson%20Chukwu%20Street%2C%20off%20Zacosem%20Gas%20Plant%2C%20Alcon%20Rd%2C%20Port%20Harcourt%2C%20Rivers%2C%20Nigeria">Add to calendar</a>
           </div>
         </article>
 
@@ -365,17 +336,18 @@ footer p { margin: 8px 0 0; font-size: 13px; letter-spacing: .2em; text-transfor
           <button class="map-tab" type="button" role="tab" id="tabRec" aria-selected="false" data-venue="rec">Reception</button>
         </div>
         <iframe class="map-frame" id="mapFrame" title="Map of the venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-          src="https://maps.google.com/maps?q=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%2C%204B%20Samson%20Chukwu%20Estate%2C%20Alcon%20Road%2C%20Woji%2C%20Port%20Harcourt&amp;z=16&amp;hl=en&amp;output=embed"></iframe>
+          src="https://maps.google.com/maps?q=Drex%20Designs%20Technologies%2C%203%20Reverend%20Samson%20Chukwu%20Street%2C%20off%20Zacosem%20Gas%20Plant%2C%20Alcon%20Rd%2C%20Port%20Harcourt%2C%20Rivers%2C%20Nigeria&amp;z=16&amp;hl=en&amp;output=embed"></iframe>
         <div class="map-meta">
-          <p id="mapAddr"><b>Watchman Catholic Charismatic Renewal Movement, Port Harcourt Diocese.</b> 4B Samson Chukwu Estate, by Zacozem Filling Station, Alcon Road, Woji, Port Harcourt.</p>
+          <p id="mapAddr"><b>Watchman Catholic Charismatic Renewal Movement, Port Harcourt Diocese.</b> 4B Samson Chukwu Estate, by Zacozem Filling Station, Alcon Road, Woji, Port Harcourt. Map pin: Drex Designs Technologies, 3 Reverend Samson Chukwu Street, off Zacosem Gas Plant, Alcon Road.</p>
           <div class="actions">
-            <a class="btn solid" id="mapDir" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%2C%204B%20Samson%20Chukwu%20Estate%2C%20Alcon%20Road%2C%20Woji%2C%20Port%20Harcourt&amp;travelmode=driving">Get directions</a>
-            <a class="btn line" id="mapOpen" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%2C%204B%20Samson%20Chukwu%20Estate%2C%20Alcon%20Road%2C%20Woji%2C%20Port%20Harcourt">Open in Google Maps</a>
+            <a class="btn solid" id="mapDir" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Drex%20Designs%20Technologies%2C%203%20Reverend%20Samson%20Chukwu%20Street%2C%20off%20Zacosem%20Gas%20Plant%2C%20Alcon%20Rd%2C%20Port%20Harcourt%2C%20Rivers%2C%20Nigeria&amp;travelmode=driving">Get directions</a>
+            <a class="btn line" id="mapOpen" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Drex%20Designs%20Technologies%2C%203%20Reverend%20Samson%20Chukwu%20Street%2C%20off%20Zacosem%20Gas%20Plant%2C%20Alcon%20Rd%2C%20Port%20Harcourt%2C%20Rivers%2C%20Nigeria">Open in Google Maps</a>
           </div>
         </div>
       </div>
     </div>
   </section>
+
 
   <section id="cards" class="tint">
     <div class="wrap center">
@@ -477,10 +449,6 @@ footer p { margin: 8px 0 0; font-size: 13px; letter-spacing: .2em; text-transfor
       <p class="sub">&nbsp;</p>
       <div>
         <details open>
-          <summary>What should I wear?</summary>
-          <p>Our colours are navy blue, gold and white. Wear one, or mix all three.</p>
-        </details>
-        <details>
           <summary>Who do I contact to confirm?</summary>
           <p>Call or WhatsApp the RSVP numbers: 0703 544 3840 or 0703 677 4210.</p>
         </details>
@@ -585,8 +553,8 @@ footer p { margin: 8px 0 0; font-size: 13px; letter-spacing: .2em; text-transfor
 
   // Venue map tabs
   var V = {
-    cer: { q: 'Watchman Catholic Charismatic Renewal Movement, 4B Samson Chukwu Estate, Alcon Road, Woji, Port Harcourt',
-           addr: '<b>Watchman Catholic Charismatic Renewal Movement, Port Harcourt Diocese.</b> 4B Samson Chukwu Estate, by Zacozem Filling Station, Alcon Road, Woji, Port Harcourt.' },
+    cer: { q: 'Drex Designs Technologies, 3 Reverend Samson Chukwu Street, off Zacosem Gas Plant, Alcon Rd, Port Harcourt, Rivers, Nigeria',
+           addr: '<b>Watchman Catholic Charismatic Renewal Movement, Port Harcourt Diocese.</b> 4B Samson Chukwu Estate, by Zacozem Filling Station, Alcon Road, Woji, Port Harcourt. Map pin: Drex Designs Technologies, 3 Reverend Samson Chukwu Street, off Zacosem Gas Plant, Alcon Road.' },
     rec: { q: 'Koral Event Center, YKC Elelenwo Road, Woji, Port Harcourt',
            addr: '<b>Koral Event Center.</b> Along YKC / Elelenwo Road, Woji, Port Harcourt.' }
   };
