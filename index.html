@@ -171,7 +171,7 @@ h2 em { font-family: var(--script); font-style: normal; color: var(--gold); font
 dialog { border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 94vh; }
 dialog::backdrop { background: rgba(30,26,12,.78); }
 dialog img { max-width: 94vw; max-height: 90vh; display: block; border-radius: 6px; }
-dialog button { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: var(--ink); font-size: 22px; cursor: pointer; }
+#lightClose, .modal-close { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: var(--ink); font-size: 22px; cursor: pointer; }
 
 /* travel */
 .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
@@ -179,6 +179,19 @@ dialog button { position: absolute; top: 8px; right: 8px; width: 40px; height: 4
 .note h3 { font-family: var(--display); font-weight: 600; font-size: 23px; margin: 0 0 6px; line-height: 1.15; }
 .note p { margin: 0; color: var(--ink-soft); }
 .note a { color: var(--gold); }
+
+/* venue map */
+.mapbox { margin-top: 40px; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+.mapbox h3 { font-family: var(--display); font-weight: 600; font-size: 26px; margin: 0 0 4px; }
+.map-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 16px; }
+.map-tab { font: 500 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; padding: 13px 18px; border-radius: 999px; border: 1px solid var(--gold); background: transparent; color: var(--gold); cursor: pointer; }
+.map-tab[aria-selected="true"] { background: var(--goldgrad); color: #fff; border-color: transparent; text-shadow: 0 1px 1px rgba(80,50,0,.3); }
+.map-frame { width: 100%; height: 380px; border: 0; border-radius: 12px; background: var(--ivory); display: block; }
+@media (max-width: 560px) { .map-frame { height: 320px; } }
+.map-meta { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; margin-top: 16px; }
+.map-meta p { margin: 0; color: var(--ink-soft); max-width: 52ch; min-width: 0; }
+.map-meta .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.map-meta .btn { padding: 12px 18px; font-size: 11.5px; }
 
 /* dress code */
 .swatches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; max-width: 720px; margin: 0 auto; }
@@ -201,10 +214,21 @@ fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
 .check { display: flex; gap: 10px; align-items: center; letter-spacing: 0; text-transform: none; font-size: 16px; color: var(--ink); font-weight: 300; }
 .check input { width: 18px; height: 18px; accent-color: var(--gold); }
 textarea { min-height: 190px; resize: vertical; line-height: 1.5; }
-.nums { font-family: var(--display); font-size: 24px; font-weight: 600; margin: -14px 0 32px; }
+.nums { font-family: var(--display); font-size: 22px; font-weight: 600; margin: 30px 0 0; line-height: 1.4; }
+.nums small { display: block; font-family: var(--body); font-weight: 300; font-size: 14px; color: var(--ink-soft); margin-bottom: 4px; }
+.nums a { color: inherit; text-decoration: none; }
 .nums b { font-weight: 600; color: var(--gold); user-select: all; }
 .hint { font-size: 13.5px; color: var(--ink-soft); margin: 8px 0 0; }
 .ok { color: var(--gold); font-weight: 500; }
+
+/* reservation pop-up */
+dialog.modal { position: relative; width: calc(100% - 32px); max-width: 560px; max-height: 92vh; overflow: auto; padding: 34px 28px 28px; background: var(--pearl); color: var(--ink); border: 1px solid var(--gold-soft); border-radius: 20px; }
+dialog.modal::backdrop { background: rgba(30,26,12,.62); }
+dialog.modal h2 { font-size: clamp(30px, 7vw, 40px); margin: 0 0 18px; }
+dialog.modal .eyebrow { margin-bottom: 6px; }
+dialog.modal textarea { min-height: 150px; }
+.modal-close { top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+.modal-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 
 /* faq */
 details { border-bottom: 1px solid var(--line); padding: 18px 0; }
@@ -334,6 +358,23 @@ footer p { margin: 8px 0 0; font-size: 13px; letter-spacing: .2em; text-transfor
           </div>
         </article>
       </div>
+
+      <div class="mapbox" id="map">
+        <h3>Find the venues</h3>
+        <div class="map-tabs" role="tablist" aria-label="Choose a venue">
+          <button class="map-tab" type="button" role="tab" id="tabCer" aria-selected="true" data-venue="cer">Ceremony &middot; 10:00 AM</button>
+          <button class="map-tab" type="button" role="tab" id="tabRec" aria-selected="false" data-venue="rec">Reception</button>
+        </div>
+        <iframe class="map-frame" id="mapFrame" title="Map of the venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+          src="https://maps.google.com/maps?q=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%2C%204B%20Samson%20Chukwu%20Estate%2C%20Alcon%20Road%2C%20Woji%2C%20Port%20Harcourt&amp;z=16&amp;hl=en&amp;output=embed"></iframe>
+        <div class="map-meta">
+          <p id="mapAddr"><b>Watchman Catholic Charismatic Renewal Movement, Port Harcourt Diocese.</b> 4B Samson Chukwu Estate, by Zacozem Filling Station, Alcon Road, Woji, Port Harcourt.</p>
+          <div class="actions">
+            <a class="btn solid" id="mapDir" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%2C%204B%20Samson%20Chukwu%20Estate%2C%20Alcon%20Road%2C%20Woji%2C%20Port%20Harcourt&amp;travelmode=driving">Get directions</a>
+            <a class="btn line" id="mapOpen" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Watchman%20Catholic%20Charismatic%20Renewal%20Movement%2C%204B%20Samson%20Chukwu%20Estate%2C%20Alcon%20Road%2C%20Woji%2C%20Port%20Harcourt">Open in Google Maps</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -395,43 +436,53 @@ footer p { margin: 8px 0 0; font-size: 13px; letter-spacing: .2em; text-transfor
   </section>
 
   <section id="rsvp" class="tint">
-    <div class="wrap">
-      <p class="eyebrow">Your reply</p>
-      <h2>Let us <em>know</em> you are coming</h2>
-      <p class="sub">Fill in your details, then send your reply on WhatsApp to either RSVP number.</p>
-      <p class="nums">RSVP: <b>0703 544 3840</b> &nbsp;&middot;&nbsp; <b>0703 677 4210</b></p>
-      <div class="rsvp">
-        <form id="rsvpForm" autocomplete="off">
-          <div>
-            <label for="gName">Your name</label>
-            <input type="text" id="gName" placeholder="e.g. Ngozi Okafor">
-          </div>
-          <div>
-            <label for="gCount">Number of guests, including you</label>
-            <select id="gCount">
-              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
-            </select>
-          </div>
-          <fieldset>
-            <legend>I will attend</legend>
-            <label class="check"><input type="checkbox" id="gCer" checked> The ceremony, 10:00 AM</label>
-            <label class="check"><input type="checkbox" id="gRec" checked> The reception at Koral Event Center</label>
-          </fieldset>
-        </form>
-        <div>
-          <label for="msg">Your message</label>
-          <textarea id="msg" readonly></textarea>
-          <div class="cta-row" style="justify-content:flex-start;margin-top:14px">
-            <a class="btn solid" id="wa1" target="_blank" rel="noopener" href="https://wa.me/2347035443840">WhatsApp 0703 544 3840</a>
-            <a class="btn solid" id="wa2" target="_blank" rel="noopener" href="https://wa.me/2347036774210">WhatsApp 0703 677 4210</a>
-            <button class="btn line" type="button" id="copyBtn">Copy message</button>
-          </div>
-          <span class="hint ok" id="copied" role="status" hidden>Copied. Paste it into your chat.</span>
-          <p class="hint">WhatsApp opens with your message ready. Nothing is sent until you tap send yourself.</p>
-        </div>
+    <div class="wrap center">
+      <p class="eyebrow">Your reply helps us prepare</p>
+      <h2>Let us plan <em>for you.</em></h2>
+      <p class="sub">Reserve your spot so the families can plan seating and refreshments for you and your guests.</p>
+      <div class="cta-row">
+        <button class="btn solid" type="button" id="openRsvp">Reserve your spot &#10003;</button>
+        <a class="btn line" href="#day">See event details</a>
       </div>
+      <p class="nums"><small>Quick question or need support? Message us on WhatsApp.</small>
+        <a href="https://wa.me/2347035443840" target="_blank" rel="noopener">0703 544 3840</a> &nbsp;&middot;&nbsp;
+        <a href="https://wa.me/2347036774210" target="_blank" rel="noopener">0703 677 4210</a></p>
     </div>
   </section>
+
+  <dialog class="modal" id="rsvpDlg" aria-labelledby="rsvpTitle">
+    <button class="modal-close" type="button" id="rsvpClose" aria-label="Close">&times;</button>
+    <p class="eyebrow">Your reservation</p>
+    <h2 id="rsvpTitle">Reserve your spot.</h2>
+    <form id="rsvpForm" autocomplete="off">
+      <div>
+        <label for="gName">Your name</label>
+        <input type="text" id="gName" placeholder="e.g. Ngozi Okafor">
+      </div>
+      <div>
+        <label for="gCount">Number of guests, including you</label>
+        <select id="gCount">
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+        </select>
+      </div>
+      <fieldset>
+        <legend>I will attend</legend>
+        <label class="check"><input type="checkbox" id="gCer" checked> The ceremony, 10:00 AM</label>
+        <label class="check"><input type="checkbox" id="gRec" checked> The reception at Koral Event Center</label>
+      </fieldset>
+      <div>
+        <label for="msg">Your message</label>
+        <textarea id="msg" readonly></textarea>
+      </div>
+    </form>
+    <div class="modal-actions">
+      <a class="btn solid" id="wa1" target="_blank" rel="noopener" href="https://wa.me/2347035443840">WhatsApp 0703 544 3840</a>
+      <a class="btn solid" id="wa2" target="_blank" rel="noopener" href="https://wa.me/2347036774210">WhatsApp 0703 677 4210</a>
+      <button class="btn line" type="button" id="copyBtn">Copy message</button>
+    </div>
+    <span class="hint ok" id="copied" role="status" hidden>Copied. Paste it into your chat.</span>
+    <p class="hint">WhatsApp opens with your message ready. Nothing is sent until you tap send yourself.</p>
+  </dialog>
 
   <section id="faq">
     <div class="wrap">
@@ -545,6 +596,33 @@ footer p { margin: 8px 0 0; font-size: 13px; letter-spacing: .2em; text-transfor
       navigator.clipboard.writeText(msg.value).then(done, fallback);
     } else { fallback(); }
   });
+
+  // Venue map tabs
+  var V = {
+    cer: { q: 'Watchman Catholic Charismatic Renewal Movement, 4B Samson Chukwu Estate, Alcon Road, Woji, Port Harcourt',
+           addr: '<b>Watchman Catholic Charismatic Renewal Movement, Port Harcourt Diocese.</b> 4B Samson Chukwu Estate, by Zacozem Filling Station, Alcon Road, Woji, Port Harcourt.' },
+    rec: { q: 'Koral Event Center, YKC Elelenwo Road, Woji, Port Harcourt',
+           addr: '<b>Koral Event Center.</b> Along YKC / Elelenwo Road, Woji, Port Harcourt.' }
+  };
+  var tabs = document.querySelectorAll('.map-tab');
+  function showVenue(key) {
+    var v = V[key], q = encodeURIComponent(v.q);
+    document.getElementById('mapFrame').src = 'https://maps.google.com/maps?q=' + q + '&z=16&hl=en&output=embed';
+    document.getElementById('mapAddr').innerHTML = v.addr;
+    document.getElementById('mapDir').href = 'https://www.google.com/maps/dir/?api=1&destination=' + q + '&travelmode=driving';
+    document.getElementById('mapOpen').href = 'https://www.google.com/maps/search/?api=1&query=' + q;
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.venue === key ? 'true' : 'false'); });
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { showVenue(t.dataset.venue); }); });
+
+  // Reservation pop-up
+  var rd = document.getElementById('rsvpDlg');
+  document.getElementById('openRsvp').addEventListener('click', function () {
+    build();
+    if (rd.showModal) rd.showModal(); else rd.setAttribute('open', '');
+  });
+  document.getElementById('rsvpClose').addEventListener('click', function () { rd.close(); });
+  rd.addEventListener('click', function (e) { if (e.target === rd) rd.close(); });
 })();
 </script>
 </body>
